@@ -12,5 +12,6 @@
         public const string WasLessThanOne = "was less than 1";
         public const string OnlyOneAllowed = "only one is allowed";
         public const string AlreadyUsed = "has already been used";
+        public const string NotFound = "not found";
     }
 }

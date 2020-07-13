@@ -45,7 +45,7 @@ namespace PureGym.ShoppingSystem
 
         public void AddVoucher(string key)
         {
-            Basket.AddAnOffer(OfferFactory.IssueOffer(key));
+            Basket.AddAVoucher(OfferFactory.IssueVoucher(key));
         }
 
 

@@ -9,7 +9,7 @@ namespace PureGym.Interfaces.Common
     {
         string Description { get; }
 
-        Money Cost { get; }
+        Money Value { get; }
 
         bool Applied { get; }
     }

@@ -65,7 +65,6 @@ namespace PureGym.Models.Compositions
                     }
                 }
             }
-           
         }
 
         /// <param name="activity">The activity to find a strategy for</param>

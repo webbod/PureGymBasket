@@ -11,7 +11,7 @@ namespace PureGym.Models.Entities
     {
         public string Description { get; private set; }
 
-        public Money Cost { get; private set; }
+        public Money Value { get; private set; }
 
         public bool Applied { get; private set; }
 
@@ -23,12 +23,12 @@ namespace PureGym.Models.Entities
             Init(key, description, cost, id);
         }
 
-        protected void Init(string key, string description, Money cost, Guid id = default(Guid))
+        protected void Init(string key, string description, Money value, Guid id = default(Guid))
         {
             if (HasBeenInitalised()) { return; }
 
-            if (cost.Value < 0) { throw new PriceOutOfRangeException($"{nameof(cost)} {SharedStrings.WasNegative}"); }
-            Cost = cost;
+            if (value < 0) { throw new PriceOutOfRangeException($"{nameof(value)} {SharedStrings.WasNegative}"); }
+            Value = value;
 
             if (string.IsNullOrEmpty(description)) { throw new ArgumentNullException($"{nameof(description)} {SharedStrings.WasEmpty}"); }
             Description = description;
