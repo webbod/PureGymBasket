@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29519.87
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PureGym.Interfaces", "PureGym.Interfaces\PureGym.Interfaces.csproj", "{8B5C9A99-5BEE-4AA2-9016-65C812605983}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PureGym.Models", "PureGym.Models\PureGym.Models.csproj", "{D90F8EDE-FE33-49D1-AAB7-5023015D403D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PureGym.Common", "PureGym.Common\PureGym.Common.csproj", "{23F2C25A-03FE-4C2A-AB1C-BEA2835A5127}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PureGym.ShoppingConsole", "PureGym.ShoppingConsole\PureGym.ShoppingConsole.csproj", "{49342F02-813D-485C-8F09-CE34CC1ADE1F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PureGym.Basket", "PureGym.Basket\PureGym.Basket.csproj", "{7D7E101B-3853-441A-B64B-B0EDD8E25CED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PureGym.ShoppingSystem", "PureGym.ShoppingSystem\PureGym.ShoppingSystem.csproj", "{778D01BD-BD05-45E9-8B04-0EBAF3BD17F1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8B5C9A99-5BEE-4AA2-9016-65C812605983}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B5C9A99-5BEE-4AA2-9016-65C812605983}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B5C9A99-5BEE-4AA2-9016-65C812605983}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B5C9A99-5BEE-4AA2-9016-65C812605983}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D90F8EDE-FE33-49D1-AAB7-5023015D403D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D90F8EDE-FE33-49D1-AAB7-5023015D403D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D90F8EDE-FE33-49D1-AAB7-5023015D403D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D90F8EDE-FE33-49D1-AAB7-5023015D403D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23F2C25A-03FE-4C2A-AB1C-BEA2835A5127}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23F2C25A-03FE-4C2A-AB1C-BEA2835A5127}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23F2C25A-03FE-4C2A-AB1C-BEA2835A5127}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23F2C25A-03FE-4C2A-AB1C-BEA2835A5127}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49342F02-813D-485C-8F09-CE34CC1ADE1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49342F02-813D-485C-8F09-CE34CC1ADE1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49342F02-813D-485C-8F09-CE34CC1ADE1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49342F02-813D-485C-8F09-CE34CC1ADE1F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D7E101B-3853-441A-B64B-B0EDD8E25CED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D7E101B-3853-441A-B64B-B0EDD8E25CED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D7E101B-3853-441A-B64B-B0EDD8E25CED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D7E101B-3853-441A-B64B-B0EDD8E25CED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{778D01BD-BD05-45E9-8B04-0EBAF3BD17F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{778D01BD-BD05-45E9-8B04-0EBAF3BD17F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{778D01BD-BD05-45E9-8B04-0EBAF3BD17F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{778D01BD-BD05-45E9-8B04-0EBAF3BD17F1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {827F8879-4222-4F71-87DE-956B2ED400A1}
+	EndGlobalSection
+EndGlobal

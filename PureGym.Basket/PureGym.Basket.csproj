@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PureGym.Common\PureGym.Common.csproj" />
+    <ProjectReference Include="..\PureGym.Models\PureGym.Models.csproj" />
+    <ProjectReference Include="..\PureGym.ShoppingSystem\PureGym.ShoppingSystem.csproj" />
+  </ItemGroup>
+
+</Project>
