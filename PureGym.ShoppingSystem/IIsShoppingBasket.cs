@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using PureGym.Common;
 using PureGym.Common.Enumerations;
+using PureGym.Interfaces.Common;
 using PureGym.Models.Entities;
 
 namespace PureGym.ShoppingSystem
@@ -9,12 +10,16 @@ namespace PureGym.ShoppingSystem
     {
         void Initalise(Currency currency);
 
-        void AddAnItem(GenericBasketItem item);
+        void AddAnItem(IIsABasketItem item);
+
         void IncrementQuantity(string key, int increment);
+
         void RemoveFromBasket(string key);
 
-        void AddAnOffer(IIsAnOffer offer);
-        
+        void AddAnOffer(IIsAnOfferItem offer);
+
+        void AddAVoucher(IIsAVoucherItem voucher);
+
         void CheckOffers();
 
         Money CalculateBasketTotal();

@@ -20,7 +20,7 @@ namespace PureGym.Basket
             OffersCurrency = currency;
         }
 
-        public IIsAnOffer IssueOffer(string key)
+        public IIsAnOfferItem IssueOffer(string key)
         {
             switch (key)
             {
@@ -31,10 +31,10 @@ namespace PureGym.Basket
             throw new KeyNotFoundException("Offer not found");
         }
 
-        public IIsAnOffer SaveFivePoundsWithHeadGear()
+        public IIsAnOfferItem SaveFivePoundsWithHeadGear()
         {
             var validationTest = new Func<List<IIsABasketItem>, bool>((basket) => basket.WhenSpendingOver50PoundsWithAnyHeadGearPurchase());
-            return new IIsAnOffer("YY-YYYY", "£5.00 off Head Gear in baskets over £50.00 Offer", new Money(5, OffersCurrency), validationTest);
+            return new GenericOffer("YY-YYYY", "£5.00 off Head Gear in baskets over £50.00 Offer", new Money(5, OffersCurrency), validationTest);
         }
     }
 }

@@ -15,13 +15,13 @@ namespace PureGym.Basket
 {
     public class ShoppingBasket : IIsShoppingBasket
     {
-        protected GenericShoppingBasket<GenericBasketItem, GenericVoucher, IIsAnOffer> Basket;
+        protected GenericShoppingBasket<GenericBasketItem, GenericVoucher, GenericOffer> Basket;
 
         public void Initalise(Currency currency)
         {
             if (Helper.CheckIfValueIsNotNull(Basket)) { return; }
 
-            Basket = new GenericShoppingBasket<GenericBasketItem, GenericVoucher, IIsAnOffer>(currency);
+            Basket = new GenericShoppingBasket<GenericBasketItem, GenericVoucher, GenericOffer>(currency);
 
             var persistenceFactory = new JsonStrategyFactory();
             var presentationFactory = new TextStrategyFactory();
@@ -35,9 +35,9 @@ namespace PureGym.Basket
             Basket.SetStrategyForActivity(presentationFactory, StrategicActivity.Presentation, TypesOfContainer.Voucher);
         }
 
-        public void AddAnItem(GenericBasketItem item)
+        public void AddAnItem(IIsABasketItem item)
         {
-            Basket.AddToBasket(item);
+            Basket.AddToBasket(item as GenericBasketItem);
         }
 
         public void IncrementQuantity(string key, int increment)
@@ -50,9 +50,14 @@ namespace PureGym.Basket
             Basket.RemoveFromBasket(key);
         }
 
-        public void AddAnOffer(IIsAnOffer offer)
+        public void AddAnOffer(IIsAnOfferItem offer)
         {
-            Basket.TryToApplyOffer(offer);
+            Basket.TryToApplyOffer(offer as GenericOffer);
+        }
+
+        public void AddAVoucher(IIsAVoucherItem voucher)
+        {
+            Basket.TryToApplyVoucher(voucher as GenericVoucher);
         }
 
         public void CheckOffers()

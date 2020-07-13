@@ -10,6 +10,7 @@ namespace PureGym.ShoppingSystem
     public class Shop
     {
         public Currency ShopCurrency { get; private set; }
+
         protected IIsAWarehouse Warehouse { get; private set; }
 
         protected IIsAnOfferFactory OfferFactory { get; private set; }
@@ -42,18 +43,24 @@ namespace PureGym.ShoppingSystem
             Basket.AddAnOffer(OfferFactory.IssueOffer(key));
         }
 
+        public void AddVoucher(string key)
+        {
+            Basket.AddAnOffer(OfferFactory.IssueOffer(key));
+        }
+
+
         public Money Total()
         {
             return Basket.CalculateBasketTotal();
         }
 
-        // need to make these work with different persistence models
+        // TODO to make these work with different persistence models
         public void ImportBasketFromJson(string json)
         {
             Basket.ImportBasketFromJson(json);
         }
 
-        // need to make these work with different persistence models
+        // TODO to make these work with different persistence models
         public string ExportBasketToJson()
         {
             return Basket.ExportBasketToJson();

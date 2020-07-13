@@ -1,4 +1,5 @@
 ﻿using PureGym.Common.Enumerations;
+using PureGym.Interfaces.Common;
 using PureGym.Models.Entities;
 
 namespace PureGym.ShoppingSystem
@@ -7,6 +8,6 @@ namespace PureGym.ShoppingSystem
     {
         void Initalise(Currency currency);
 
-        IIsAnOffer IssueOffer(string key);
+        IIsAnOfferItem IssueOffer(string key);
     }
 }

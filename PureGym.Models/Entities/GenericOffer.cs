@@ -7,7 +7,7 @@ using System.Text;
 
 namespace PureGym.Models.Entities
 {
-    public class IIsAnOffer : AGenericEntity, IIsAnOfferItem
+    public class GenericOffer : AGenericEntity, IIsAnOfferItem
     {
         public string Description { get; private set; }
 
@@ -34,9 +34,9 @@ namespace PureGym.Models.Entities
             return ifItPassesThis(basket);
         }
 
-        public IIsAnOffer() {   }
+        public GenericOffer() {   }
 
-        public IIsAnOffer(string key, string description, Money value, Func<List<IIsABasketItem>, bool> validationTest, Guid id = default(Guid)) :
+        public GenericOffer(string key, string description, Money value, Func<List<IIsABasketItem>, bool> validationTest, Guid id = default(Guid)) :
             base()
         {
             Init(key, description, value, validationTest, id);
