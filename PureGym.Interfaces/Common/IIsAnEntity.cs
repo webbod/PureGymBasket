@@ -7,6 +7,7 @@ namespace PureGym.Interfaces.Common
     public interface IIsAnEntity
     {
         Guid Id { get; }
+
         string Key { get; }
     }
 }

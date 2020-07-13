@@ -2,6 +2,7 @@
 using PureGym.Common.Enumerations;
 using PureGym.Interfaces.Common;
 using PureGym.Interfaces.Containers;
+using PureGym.Interfaces.Strategies;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,7 @@ namespace PureGym.Models.Containers
         ISupportsContainerPersistence<TEntityType>
         where TEntityType : IIsAnInventoryItem, new()
     {
-        public InventoryContainer() : base()
+        public InventoryContainer(Currency currency) : base(currency)
         {
             TypeOfContainer = TypesOfContainer.Inventory;
         }

@@ -3,6 +3,7 @@ using PureGym.Common;
 using PureGym.Common.Enumerations;
 using PureGym.Interfaces.Common;
 using PureGym.Interfaces.Containers;
+using PureGym.Interfaces.Strategies;
 using PureGym.Models.Entities;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,7 @@ namespace PureGym.Models.Containers
         where TEntityType : IIsABasketItem, new()
     {
 
-        public BasketContainer() : base()
+        public BasketContainer(Currency currency) : base(currency)
         {
             TypeOfContainer = TypesOfContainer.Basket;
         }

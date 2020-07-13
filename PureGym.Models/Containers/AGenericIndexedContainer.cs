@@ -3,10 +3,10 @@ using PureGym.Common.Enumerations;
 using PureGym.Common.Exceptions;
 using PureGym.Interfaces.Common;
 using PureGym.Interfaces.Containers;
+using PureGym.Interfaces.Strategies;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace PureGym.Models.Containers
 {
@@ -18,6 +18,7 @@ namespace PureGym.Models.Containers
         ISupportsContainerPersistence<TEntityType>
         where TEntityType : IIsAnEntity, IHasAValue, new()
     {
+        public Currency Currency { get; private set; }
 
         /// <summary>
         /// Physical type of the container items
@@ -38,27 +39,28 @@ namespace PureGym.Models.Containers
         {
             get
             {
-                if (_Store == null) { Initalise(); }
+                if (_Store == null) { Initalise(Currency); }
                 return _Store;
             }
             set
             {
-                if (value == null) { Initalise(); }
+                if (value == null) { Initalise(Currency); }
                 else { _Store = value; }
             }
         }
 
         #region Constructor and Initalisation
-        public AGenericIndexedContainer()
+        public AGenericIndexedContainer(Currency currency)
         {
-            Initalise();
+            Initalise(currency);
         }
 
         /// <summary>
         /// Initialises the state of the container
         /// </summary>
-        protected virtual void Initalise()
+        protected virtual void Initalise(Currency currency)
         {
+            Currency = currency;
             _Store = new Dictionary<string, TEntityType>();
             TypeOfEntity = typeof(TEntityType);
         }
@@ -119,7 +121,7 @@ namespace PureGym.Models.Containers
         public Money Sum(Func<TEntityType, Money> expression)
         {
             Helper.CheckIfValueIsNull(expression, nameof(expression));
-            return GetAll().Select(expression).Sum();
+            return GetAll().Select(expression).Sum(Currency);
         }
 
         /// <summary>

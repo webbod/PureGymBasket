@@ -3,6 +3,7 @@ using PureGym.Common.Enumerations;
 using PureGym.Common.Exceptions;
 using PureGym.Interfaces.Common;
 using PureGym.Interfaces.Containers;
+using PureGym.Interfaces.Strategies;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace PureGym.Models.Containers
         where TEntityType : IIsAnOfferItem, new()
     {
 
-        public OfferContainer() : base()
+        public OfferContainer(Currency currency) : base(currency)
         {
             TypeOfContainer = TypesOfContainer.Offer;
         }

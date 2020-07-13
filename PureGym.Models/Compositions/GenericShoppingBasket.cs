@@ -27,9 +27,9 @@ namespace PureGym.Models.Compositions
         {
             BasketCurrency = basketCurrency;
 
-            _BasketItems = new BasketContainer<TBasketItemType>();
-            _VoucherItems = new VoucherContainer<TVoucherType>();
-            _OfferItems = new OfferContainer<TOfferType>();
+            _BasketItems = new BasketContainer<TBasketItemType>(BasketCurrency);
+            _VoucherItems = new VoucherContainer<TVoucherType>(BasketCurrency);
+            _OfferItems = new OfferContainer<TOfferType>(BasketCurrency);
 
             _ActivityStrategies = new Dictionary<StrategicActivity, Dictionary<TypesOfContainer, IIsAStrategy>>();
         }

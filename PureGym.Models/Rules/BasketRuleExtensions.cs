@@ -85,7 +85,8 @@ namespace PureGym.Models.Rules
         /// </example>                
         public static IEnumerable<IIsABasketItem> AndTheValueIsAtLeast(this IEnumerable<IIsABasketItem> items, decimal minimumValue)
         {
-            var total = items.Sum(i => i.Quantity * i.Price);
+            var currency = items.First()?.Price.Currency ?? Currency.Unknown;
+            var total = items.Sum(i => i.Price * i.Quantity, currency);
             return total >= minimumValue ? 
                 items : 
                 throw new OfferNotValidException(new OfferNotValidException.ValidityError { OutstandingBalance = minimumValue - total });

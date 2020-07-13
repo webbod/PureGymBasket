@@ -18,7 +18,7 @@ namespace PureGym.Basket
 
             WarehouseCurrency = currency;
 
-            Inventory = new InventoryContainer<GenericInventoryItem>();
+            Inventory = new InventoryContainer<GenericInventoryItem>(WarehouseCurrency);
 
             Inventory.Insert(new GenericInventoryItem("HAT001", "A Nice Hat", new Money(17.50m, WarehouseCurrency), StockCategory.HeadGear));
             Inventory.Insert(new GenericInventoryItem("COAT01", "A Decent Coat", new Money(65m, WarehouseCurrency), StockCategory.Formalwear));

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace PureGym.Interfaces.Containers
+namespace PureGym.Interfaces.Strategies
 {
     /// <summary>
     /// Indicates that a container supports persistence through a serialization/deserialization metaphor

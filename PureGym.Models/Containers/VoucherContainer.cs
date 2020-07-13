@@ -3,6 +3,7 @@ using PureGym.Common.Enumerations;
 using PureGym.Common.Exceptions;
 using PureGym.Interfaces.Common;
 using PureGym.Interfaces.Containers;
+using PureGym.Interfaces.Strategies;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,7 @@ namespace PureGym.Models.Containers
         ISupportsContainerPersistence<TEntityType>
         where TEntityType : IIsAVoucherItem, new()
     {
-        public VoucherContainer() : base()
+        public VoucherContainer(Currency currency) : base(currency)
         {
             TypeOfContainer = TypesOfContainer.Voucher;
         }
