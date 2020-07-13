@@ -30,11 +30,6 @@ namespace PureGym.Models.Containers
         /// <exception cref="VoucherAlreadyAppliedException"></exception>
         public override void Insert(TEntityType obj)
         {
-            if(Find(obj.Key)?.Equals(default(TEntityType)) == true)
-            {
-                throw new VoucherAlreadyAppliedException($"{obj.Key} {SharedStrings.AlreadyUsed}");
-            }
-
             base.Insert(obj);
         }
     }

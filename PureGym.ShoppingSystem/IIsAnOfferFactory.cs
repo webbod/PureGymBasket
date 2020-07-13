@@ -9,6 +9,7 @@ namespace PureGym.ShoppingSystem
         void Initalise(Currency currency);
 
         IIsAnOfferItem IssueOffer(string key);
+
         IIsAVoucherItem IssueVoucher(string key);
     }
 }

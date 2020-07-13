@@ -19,7 +19,8 @@ namespace PureGym.ShoppingConsole
             shop.RemoveFromBasket("SHOE11");
             shop.UpdateBasketQuantity("HAT001", 20);
 
-            shop.AddAnOffer("SaveFivePoundsWithHeadGear");
+            shop.AddAnOffer(OfferKeys.SaveFivePoundsWithHeadGear);
+            shop.AddAVoucher(VoucherKeys.FivePoundGiftVoucher);
 
             var total = shop.Total();
             var invoice = shop.GenerateInvoice();
