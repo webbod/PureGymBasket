@@ -15,5 +15,7 @@
         public const string NotFound = "not found";
         public const string Applied = "Applied";
         public const string RendererNotFound = "does not have a renderer for";
+
+        public const string Seperator = "::";
     }
 }

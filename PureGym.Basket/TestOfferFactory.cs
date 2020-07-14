@@ -46,7 +46,11 @@ namespace PureGym.Basket
 
         public IIsAVoucherItem IssueVoucher(string key)
         {
-            switch (key)
+            Helper.CheckIfValueIsNull(key, nameof(key));
+
+            (string realKey, string id) = Helper.Seperate(key);
+
+            switch (realKey)
             {
                 case VoucherKeys.FivePoundGiftVoucher:
                     return FixedPriceGiftVoucher(VoucherKeys.FivePoundGiftVoucher, new Money(5, OffersCurrency));
@@ -72,7 +76,7 @@ namespace PureGym.Basket
 
         private IIsAVoucherItem FixedPriceGiftVoucher(string key, Money value)
         {
-            var voucherKey = $"{key}::{Guid.NewGuid()}";
+            var voucherKey = Helper.Combine(key, Guid.NewGuid());
             return new GenericVoucher(voucherKey, $"{value} Gift Voucher", value);
         }
     }

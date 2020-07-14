@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace PureGym.Common
 {
@@ -29,5 +30,22 @@ namespace PureGym.Common
             return !(value == null || value.Equals(default(T)));
         }
         #endregion
+
+        public static string Combine(object first, object second)
+        {
+            return $"{first}{SharedStrings.Seperator}{second}";
+        }
+
+        public static (string first, string last) Seperate(string encoded)
+        {
+            if (!encoded.Contains(SharedStrings.Seperator))
+            {
+                return (encoded, string.Empty);
+            }
+
+            var parts = encoded.Split(SharedStrings.Seperator, StringSplitOptions.RemoveEmptyEntries);
+
+            return (parts.First(), parts.Last());
+        }
     }
 }

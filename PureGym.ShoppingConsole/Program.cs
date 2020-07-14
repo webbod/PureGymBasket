@@ -1,4 +1,5 @@
 ﻿using PureGym.Basket;
+using PureGym.Common;
 using PureGym.Common.Enumerations;
 using PureGym.Interfaces.Common;
 using PureGym .Models.Compositions;
@@ -45,15 +46,12 @@ namespace PureGym.ShoppingConsole
 
         static void RenderInvoice(IIsAnInvoice invoice)
         {
-            string offerDetails = string.Empty;
+            string description = string.Empty;
             string message = string.Empty;
-
+            
             if (invoice.Offers.Any())
             {
-                var descriptionParts = invoice.Offers.First().Description.Split("::", StringSplitOptions.RemoveEmptyEntries);
-                offerDetails = descriptionParts.First();
-
-                if (descriptionParts.Count() == 2) { message = descriptionParts.Last(); }
+                (description, message) = Helper.Seperate(invoice.Offers?.First()?.Description);
             }
 
             foreach (var line in invoice.BasketItems)
@@ -63,9 +61,9 @@ namespace PureGym.ShoppingConsole
             Console.WriteLine(invoice.BasketTotal);
             Console.WriteLine("-------------------------");
 
-            if (!string.IsNullOrEmpty(offerDetails))
+            if (!string.IsNullOrEmpty(description))
             {
-                Console.WriteLine(offerDetails);
+                Console.WriteLine(description);
                 Console.WriteLine("-------------------------");
             }
 
