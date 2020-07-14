@@ -1,4 +1,5 @@
 ﻿using System;
+using PureGym.Common;
 using PureGym.Interfaces.Common;
 
 namespace PureGym.Models.Invoice
@@ -10,6 +11,10 @@ namespace PureGym.Models.Invoice
         public string Description { get; set; }
 
         public Guid Id { get; set; }
+
+        public int Quantity { get; set; }
+
+        public Money Total { get; set; }
 
     }
 }

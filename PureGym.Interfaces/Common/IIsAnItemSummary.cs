@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PureGym.Common;
+using System;
 
 namespace PureGym.Interfaces.Common
 {
@@ -7,5 +8,9 @@ namespace PureGym.Interfaces.Common
         string Description { get; set; }
         Guid Id { get; set; }
         string Key { get; set; }
+
+        int Quantity { get; set; }
+
+        Money Total { get; set; }
     }
 }

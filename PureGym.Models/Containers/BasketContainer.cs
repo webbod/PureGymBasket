@@ -2,7 +2,9 @@
 using PureGym.Common.Enumerations;
 using PureGym.Interfaces.Common;
 using PureGym.Interfaces.Strategies;
+using PureGym.Models.Invoice;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace PureGym.Models.Containers
 {
@@ -34,6 +36,12 @@ namespace PureGym.Models.Containers
             {
                 base.Insert(obj);
             }
+        }
+
+        /// <returns>A summary of each item in the container</returns>
+        public override List<IIsAnItemSummary> Summarise()
+        {
+            return GetAll().Select(i => new ItemSummary { Id = i.Id, Key = i.Key, Description = i.ToString(), Quantity = i.Quantity, Total = i.Value * i.Quantity } as IIsAnItemSummary).ToList();
         }
 
         public override Money CalculateTotal(Money runningTotal)

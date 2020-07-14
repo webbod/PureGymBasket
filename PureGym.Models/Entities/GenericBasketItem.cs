@@ -41,7 +41,7 @@ namespace PureGym.Models.Entities
 
         public void Update(IIsAnInventoryItem item = default(IIsAnInventoryItem), int quantity = 1)
         {
-            if ((HasBeenInitalised && Helper.CheckIfValueIsNotNull(item)) == false)
+            if (!HasBeenInitalised &&  Helper.CheckIfValueIsNotNull(item))
             {
                 Init(item.Key, item.Description, item.Value, item.Category, quantity, item.Id);
             }          

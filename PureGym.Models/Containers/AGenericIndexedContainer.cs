@@ -165,7 +165,7 @@ namespace PureGym.Models.Containers
         /// <returns>A summary of each item in the container</returns>
         public virtual List<IIsAnItemSummary> Summarise()
         {
-            return GetAll().Select(i => new ItemSummary { Id = i.Id, Key = i.Key, Description = i.ToString() } as IIsAnItemSummary).ToList();
+            return GetAll().Select(i => new ItemSummary { Id = i.Id, Key = i.Key, Description = i.ToString(), Quantity = 1, Total = i.Value } as IIsAnItemSummary).ToList();
         }
 
         public virtual Money CalculateTotal(Money runningTotal)
