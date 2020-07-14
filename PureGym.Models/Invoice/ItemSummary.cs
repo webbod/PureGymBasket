@@ -1,7 +1,7 @@
 ﻿using System;
 using PureGym.Interfaces.Common;
 
-namespace PureGym.Models.Summary
+namespace PureGym.Models.Invoice
 {
     public struct ItemSummary : IIsAnItemSummary
     {

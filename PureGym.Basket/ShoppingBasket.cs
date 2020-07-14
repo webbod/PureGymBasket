@@ -6,8 +6,6 @@ using PureGym.Interfaces.Common;
 using PureGym.Interfaces.ShoppingSystem;
 using PureGym.Models.Compositions;
 using PureGym.Models.Entities;
-using PureGym.Models.Summary;
-using System.Collections.Generic;
 
 namespace PureGym.Basket
 {

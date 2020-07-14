@@ -1,13 +1,11 @@
 ﻿using PureGym.Common;
 using PureGym.Common.Enumerations;
-using PureGym.Models.Entities;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using PureGym.Interfaces.Common;
+using PureGym.Interfaces.ShoppingSystem;
 
-namespace PureGym.ShoppingSystem
+namespace PureGym.Models.Compositions
 {
-    public class Shop
+    public class GenericShop : IIsAShop
     {
         public Currency ShopCurrency { get; private set; }
 
@@ -17,15 +15,15 @@ namespace PureGym.ShoppingSystem
 
         protected IIsShoppingBasket Basket { get; private set; }
 
-        public Shop(IIsAWarehouse warehouse, IIsAnOfferFactory offerFactory, IIsShoppingBasket basket, Currency currency = Currency.GBP)
+        public GenericShop(IIsAWarehouse warehouse, IIsAnOfferFactory offerFactory, IIsShoppingBasket basket, Currency currency = Currency.GBP)
         {
             Initalise(warehouse, offerFactory, basket, currency);
         }
 
         public void Initalise(IIsAWarehouse warehouse, IIsAnOfferFactory offerFactory, IIsShoppingBasket basket, Currency currency = Currency.GBP)
         {
-            if(Helper.CheckIfValueIsNotNull(Basket)) { return;  }
-            
+            if (Helper.CheckIfValueIsNotNull(Basket)) { return; }
+
             ShopCurrency = currency;
 
             Warehouse = warehouse;
@@ -38,9 +36,29 @@ namespace PureGym.ShoppingSystem
             Basket.Initalise(ShopCurrency);
         }
 
+        public void AddToBasket(string key)
+        {
+            Basket.AddAnItem(Warehouse.GetItem(key));
+        }
+
+        public void UpdateBasketQuantity(string key, int increment)
+        {
+            Basket.IncrementQuantity(key, increment);
+        }
+
+        public void RemoveFromBasket(string key)
+        {
+            Basket.RemoveItem(key);
+        }
+
         public void AddAnOffer(string key)
         {
             Basket.AddAnOffer(OfferFactory.IssueOffer(key));
+        }
+
+        public void RemoveAnOffer(string key)
+        {
+            Basket.RemoveOffer(key);
         }
 
         public void AddAVoucher(string key)
@@ -48,10 +66,9 @@ namespace PureGym.ShoppingSystem
             Basket.AddAVoucher(OfferFactory.IssueVoucher(key));
         }
 
-
-        public Money Total()
+        public void RemoveAVoucher(string key)
         {
-            return Basket.CalculateBasketTotal();
+            Basket.RemoveVoucher(key);
         }
 
         // TODO to make these work with different persistence models
@@ -66,25 +83,9 @@ namespace PureGym.ShoppingSystem
             return Basket.ExportBasketToJson();
         }
 
-        public List<string> GenerateInvoice()
+        public IIsAnInvoice GenerateInvoice()
         {
-            Basket.CheckOffers();
             return Basket.GenerateInvoice();
-        }
-
-        public void AddToBasket(string key)
-        {
-            Basket.AddAnItem(Warehouse.GetItem(key));
-        }
-
-        public void RemoveFromBasket(string key)
-        {
-            Basket.RemoveFromBasket(key);
-        }
-
-        public void UpdateBasketQuantity(string key, int increment)
-        {
-            Basket.IncrementQuantity(key, increment);
         }
     }
 }

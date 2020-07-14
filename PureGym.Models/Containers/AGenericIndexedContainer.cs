@@ -4,7 +4,7 @@ using PureGym.Common.Exceptions;
 using PureGym.Interfaces.Common;
 using PureGym.Interfaces.Containers;
 using PureGym.Interfaces.Strategies;
-using PureGym.Models.Summary;
+using PureGym.Models.Invoice;
 using System;
 using System.Collections.Generic;
 using System.Linq;

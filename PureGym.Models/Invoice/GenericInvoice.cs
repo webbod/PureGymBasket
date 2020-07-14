@@ -4,9 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace PureGym.Models.Summary
+namespace PureGym.Models.Invoice
 {
-    public class Invoice : IIsAnInvoice
+    public class GenericInvoice : IIsAnInvoice
     {
         public List<IIsAnItemSummary> BasketItems { get; set; }
         public Money BasketTotal { get; set; }

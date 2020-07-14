@@ -1,13 +1,10 @@
-﻿using PureGym.Interfaces.Common;
-using System;
-using PureGym.Models.Containers;
-using PureGym.Common.Exceptions;
-using System.Collections.Generic;
+﻿using PureGym.Common;
 using PureGym.Common.Enumerations;
-using PureGym.Common;
-using PureGym.Interfaces.Strategies;
-using PureGym.Models.Entities;
-using PureGym.Models.Summary;
+using PureGym.Interfaces.Common;
+using PureGym.Models.Containers;
+using PureGym.Models.Invoice;
+using System;
+using System.Collections.Generic;
 
 namespace PureGym.Models.Compositions
 {
@@ -69,11 +66,11 @@ namespace PureGym.Models.Compositions
             }
         }
 
-        public Invoice GenerateInvoice()
+        public IIsAnInvoice GenerateInvoice()
         {
             var zero = new Money(0, BasketCurrency);
 
-            var invoice = new Invoice
+            var invoice = new GenericInvoice
             {
                 BasketItems = _BasketItems.Summarise(),
                 BasketTotal = _BasketItems.CalculateTotal(zero),

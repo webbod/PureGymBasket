@@ -12,13 +12,13 @@ namespace PureGym.BehaviouralTests.Basket
     [Binding]
     public class BasketSteps
     {
-        private Shop Shop;
+        private GenericShop Shop;
         private IIsAnInvoice Invoice;
 
         [Given(@"I have an empty basket")]
         public void GivenIHaveAnEmptyBasket()
         {
-            Shop = new Shop(new TestWarehouse(), new TestOfferFactory(), new ShoppingBasket(), Currency.GBP);
+            Shop = new GenericShop(new TestWarehouse(), new TestOfferFactory(), new ShoppingBasket(), Currency.GBP);
         }
         
         [Given(@"I have added ""(.*)"" into the basket")]

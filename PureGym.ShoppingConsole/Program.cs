@@ -8,7 +8,7 @@ namespace PureGym.ShoppingConsole
     {
         static void Main(string[] args)
         {
-            var shop = new Shop(new TestWarehouse(), new TestOfferFactory(), new ShoppingBasket(), Currency.GBP);
+            var shop = new GenericShop(new TestWarehouse(), new TestOfferFactory(), new ShoppingBasket(), Currency.GBP);
                
             shop.AddToBasket(WarehouseKeys.HAT001);
             shop.AddToBasket(WarehouseKeys.COAT01);
