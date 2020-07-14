@@ -17,14 +17,17 @@ namespace PureGym.ShoppingConsole
             shop.AddToBasket(WarehouseKeys.COAT01);
             shop.AddToBasket(WarehouseKeys.SHOE11);
 
-            shop.UpdateBasketQuantity(WarehouseKeys.HAT001, 1);
+            shop.UpdateBasketQuantity(WarehouseKeys.HAT001, 3);
+            shop.UpdateBasketQuantity(WarehouseKeys.HAT001, -2);
             shop.RemoveFromBasket(WarehouseKeys.COAT01);
 
 
             shop.AddAnOffer(OfferKeys.SaveFivePoundsWithHeadGear);
+            
+            // you can add multiple different vouchers, just not the same one more than once
+            // TODO: make vouchers stack the way the basket items do - might need a way to index the voucher ids
             shop.AddAVoucher(VoucherKeys.FivePoundGiftVoucher);
-            shop.AddAVoucher(VoucherKeys.FivePoundGiftVoucher);
-            shop.AddAVoucher(VoucherKeys.FivePoundGiftVoucher);
+            shop.AddAVoucher(VoucherKeys.TenPoundGiftVoucher);
 
             var invoice = shop.GenerateInvoice();
 
