@@ -2,12 +2,7 @@
 using PureGym.Common.Enumerations;
 using PureGym.Common.Exceptions;
 using PureGym.Interfaces.Common;
-using PureGym.Interfaces.Containers;
 using PureGym.Interfaces.Strategies;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace PureGym.Models.Containers
 {
@@ -23,14 +18,30 @@ namespace PureGym.Models.Containers
             TypeOfContainer = TypesOfContainer.Voucher;
         }
 
+        //TODO Find a way to stop the exact same voucher being applied over and over again
         /// <summary>
         /// Inserts a voucher
-        /// Each vouchers can only be used once
         /// </summary>
         /// <exception cref="VoucherAlreadyAppliedException"></exception>
         public override void Insert(TEntityType obj)
         {
             base.Insert(obj);
+        }
+
+        public override Money CalculateTotal(Money runningTotal)
+        {
+            GetAll().ForEach(i => {
+                if (runningTotal > 0)
+                {
+                    i.ApplyVoucher();
+                    runningTotal -= i.Value;
+                } else
+                {
+                    i.DontApplyVoucher();
+                 }
+            });
+
+            return Find(i => i.Applied).Sum(i => i.Value, Currency);
         }
     }
 }

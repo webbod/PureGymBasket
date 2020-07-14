@@ -2,12 +2,7 @@
 using PureGym.Common.Enumerations;
 using PureGym.Common.Exceptions;
 using PureGym.Interfaces.Common;
-using PureGym.Interfaces.Containers;
 using PureGym.Interfaces.Strategies;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace PureGym.Models.Containers
 {
@@ -37,6 +32,11 @@ namespace PureGym.Models.Containers
             }
 
             base.Insert(obj);
+        }
+
+        public override Money CalculateTotal(Money runningTotal)
+        {
+            return Find(i => i.CanBeApplied).Sum(i => i.Value, Currency);
         }
     }
 }
