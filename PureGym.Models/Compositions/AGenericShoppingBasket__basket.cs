@@ -20,7 +20,7 @@ namespace PureGym.Models.Compositions
         public void IncrementQuantity(string key, int increment)
         {
             var item = _BasketItems.Find(key);
-            CheckIsNotNull(item);
+            Helper.CheckIfValueIsNull(item, nameof(item));
 
             var newQuantity = item.Quantity + increment;
             if (newQuantity < 0)
@@ -69,7 +69,7 @@ namespace PureGym.Models.Compositions
         /// <returns>The value of items in the basket</returns>
         public Money CalculateBasketTotal()
         {
-            return GenericContainerOperations.CalculateContainerTotal<TBasketItemType>(_BasketItems, new Func<TBasketItemType, Money>((i) => i.Price * i.Quantity));
+            return GenericContainerOperations.CalculateContainerTotal<TBasketItemType>(_BasketItems, new Func<TBasketItemType, Money>((i) => i.Value * i.Quantity));
         }
 
         /// <typeparam name="TImportType">The type of the data parameter</typeparam>

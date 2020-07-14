@@ -7,9 +7,11 @@ using PureGym.Common.Enumerations;
 using PureGym.Common;
 using PureGym.Interfaces.Strategies;
 using PureGym.Models.Entities;
+using PureGym.Models.Summary;
 
 namespace PureGym.Models.Compositions
 {
+    // TODO refactor this to be more generic
     public partial class GenericShoppingBasket<TBasketItemType, TVoucherType, TOfferType>
         where TBasketItemType : class, IIsABasketItem, new()
         where TVoucherType : class, IIsAVoucherItem, new()
@@ -67,6 +69,26 @@ namespace PureGym.Models.Compositions
             }
         }
 
+        public Invoice GenerateInvoice()
+        {
+            var zero = new Money(0, BasketCurrency);
+
+            var invoice = new Invoice
+            {
+                BasketItems = _BasketItems.Summarise(),
+                BasketTotal = _BasketItems.CalculateTotal(zero),
+
+                Vouchers = _VoucherItems.Summarise(),
+                
+                Offers = _OfferItems.Summarise(),
+                OfferTotal = _OfferItems.CalculateTotal(zero)
+            };
+
+            invoice.VoucherTotal = _VoucherItems.CalculateTotal(invoice.BasketTotal - invoice.OfferTotal);
+
+            return invoice;
+        }
+
         /// <param name="activity">The activity to find a strategy for</param>
         /// <returns>The currently assigned strategy</returns>
         /// <exception cref="KeyNotFoundException"></exception>
@@ -89,7 +111,7 @@ namespace PureGym.Models.Compositions
         /// <exception cref="ArgumentNullException"></exception>
         public void TryToApplyVoucher(TVoucherType item)
         {
-            CheckIsNotNull(item);
+            Helper.CheckIfValueIsNull(item, nameof(item));
             _VoucherItems.Insert(item);
         }
 
@@ -99,7 +121,7 @@ namespace PureGym.Models.Compositions
         /// <exception cref="ArgumentNullException"></exception>
         public void RemoveVoucher(string key)
         {
-            CheckIsNotNull(key);
+            Helper.CheckIfValueIsNull(key, nameof(key));
             _VoucherItems.Remove(key);
         }
 
@@ -112,7 +134,7 @@ namespace PureGym.Models.Compositions
         /// <exception cref="ArgumentNullException"></exception>
         public void TryToApplyOffer(TOfferType item)
         {
-            CheckIsNotNull(item);
+            Helper.CheckIfValueIsNull(item, nameof(item));
             _OfferItems.Insert(item);
         }
 
@@ -122,18 +144,9 @@ namespace PureGym.Models.Compositions
         /// <exception cref="ArgumentNullException"></exception>
         public void RemoveOffer(string key)
         {
-            CheckIsNotNull(key);
+            Helper.CheckIfValueIsNull(key, nameof(key));
             _OfferItems.Remove(key);
         }
         #endregion
-
-        protected void CheckIsNotNull(object obj)
-        {
-            if (obj == null)
-            {
-                throw new ArgumentNullException();
-            }
-        }
-
     }
 }
