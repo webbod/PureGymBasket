@@ -26,6 +26,11 @@ namespace PureGym.Common.Enumerations
         Inventory,
 
         /// <summary>
+        /// A High
+        /// </summary>
+        Shop,
+
+        /// <summary>
         /// Basket, Offer and Voucher containers
         /// </summary>
         AllShoppingBasketContainers = TypesOfContainer.Basket | TypesOfContainer.Offer | TypesOfContainer.Voucher
