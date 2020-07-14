@@ -4,6 +4,7 @@ using PureGym.Common.Exceptions;
 using PureGym.Interfaces.Common;
 using PureGym.Interfaces.Containers;
 using PureGym.Interfaces.Strategies;
+using PureGym.Models.Summary;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,21 +34,7 @@ namespace PureGym.Models.Containers
         /// <summary>
         /// Manages the contents of the container
         /// </summary>
-        private Dictionary<string, TEntityType> _Store;
-
-        private Dictionary<string, TEntityType> Store
-        {
-            get
-            {
-                if (_Store == null) { Initalise(Currency); }
-                return _Store;
-            }
-            set
-            {
-                if (value == null) { Initalise(Currency); }
-                else { _Store = value; }
-            }
-        }
+        private Dictionary<string, TEntityType> Store { get; set; }
 
         #region Constructor and Initalisation
         public AGenericIndexedContainer(Currency currency)
@@ -61,7 +48,7 @@ namespace PureGym.Models.Containers
         protected virtual void Initalise(Currency currency)
         {
             Currency = currency;
-            _Store = new Dictionary<string, TEntityType>();
+            Store = new Dictionary<string, TEntityType>();
             TypeOfEntity = typeof(TEntityType);
         }
         #endregion
@@ -173,6 +160,17 @@ namespace PureGym.Models.Containers
             CheckIfContainerIsEmpty();
 
             return renderer(GetAll());
+        }
+
+        /// <returns>A summary of each item in the container</returns>
+        public virtual List<IIsAnItemSummary> Summarise()
+        {
+            return GetAll().Select(i => new ItemSummary { Id = i.Id, Key = i.Key, Description = i.ToString() } as IIsAnItemSummary).ToList();
+        }
+
+        public virtual Money CalculateTotal(Money runningTotal)
+        {
+            return GetAll().Sum(i => i.Value, Currency);
         }
         #endregion
 
