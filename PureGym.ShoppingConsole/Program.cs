@@ -24,10 +24,12 @@ namespace PureGym.ShoppingConsole
 
             shop.AddAnOffer(OfferKeys.SaveFivePoundsWithHeadGear);
             
-            // you can add multiple different vouchers, just not the same one more than once
-            // TODO: make vouchers stack the way the basket items do - might need a way to index the voucher ids
-            shop.AddAVoucher(VoucherKeys.FivePoundGiftVoucher);
-            shop.AddAVoucher(VoucherKeys.TenPoundGiftVoucher);
+            // each voucher gets a unique key - this allows them to stack, but the key is generated dynamically
+            var voucher1 = shop.AddAVoucher(VoucherKeys.FivePoundGiftVoucher);
+            var voucher2 = shop.AddAVoucher(VoucherKeys.FivePoundGiftVoucher);
+            var voucher3 = shop.AddAVoucher(VoucherKeys.FivePoundGiftVoucher);
+
+            shop.RemoveAVoucher(voucher3);
 
             var invoice = shop.GenerateInvoice();
 

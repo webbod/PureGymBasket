@@ -72,7 +72,8 @@ namespace PureGym.Basket
 
         private IIsAVoucherItem FixedPriceGiftVoucher(string key, Money value)
         {
-            return new GenericVoucher(key, $"{value} Gift Voucher", value);
+            var voucherKey = $"{key}::{Guid.NewGuid()}";
+            return new GenericVoucher(voucherKey, $"{value} Gift Voucher", value);
         }
     }
 }

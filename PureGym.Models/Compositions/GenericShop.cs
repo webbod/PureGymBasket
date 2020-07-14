@@ -61,9 +61,16 @@ namespace PureGym.Models.Compositions
             Basket.RemoveOffer(key);
         }
 
-        public void AddAVoucher(string key)
+        /// <summary>
+        /// You need to keep track of this key
+        /// </summary>
+        /// <param name="key">the unique id for this voucher</param>
+        /// <returns></returns>
+        public string AddAVoucher(string key)
         {
-            Basket.AddAVoucher(OfferFactory.IssueVoucher(key));
+            var voucher = OfferFactory.IssueVoucher(key);
+            Basket.AddAVoucher(voucher);
+            return voucher.Key;
         }
 
         public void RemoveAVoucher(string key)

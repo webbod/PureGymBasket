@@ -17,7 +17,7 @@ namespace PureGym.Interfaces.ShoppingSystem
         void AddAnOffer(string key);
         void RemoveAnOffer(string key);
 
-        void AddAVoucher(string key);
+        string AddAVoucher(string key);
         void RemoveAVoucher(string key);
 
         string ExportBasketToJson();
