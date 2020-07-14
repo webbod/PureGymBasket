@@ -4,8 +4,6 @@ using PureGym.Common.Enumerations;
 using PureGym.Common.Exceptions;
 using PureGym.Interfaces.Common;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace PureGym.Models.Entities
 {
@@ -19,21 +17,21 @@ namespace PureGym.Models.Entities
         {
         }
 
-        public GenericBasketItem(string key, string description, Money price, StockCategory category, int quantity, Guid id = default(Guid)) :
+        public GenericBasketItem(string key, string description, Money value, StockCategory category, int quantity, Guid id = default(Guid)) :
             base()
         {
-            Init(key, description, price, category, quantity, id);
+            Init(key, description, value, category, quantity, id);
         }
 
         public static GenericBasketItem CreateFrom<T>(T item, int quantity, Guid id = default(Guid)) where T : IIsAnInventoryItem
         {
-            return new GenericBasketItem(item.Key, item.Description, item.Price, item.Category, quantity, id);
+            return new GenericBasketItem(item.Key, item.Description, item.Value, item.Category, quantity, id);
         }
 
 
         protected void Init(string key, string description, Money price, StockCategory category, int quantity, Guid id = default(Guid))
         {
-            if (HasBeenInitalised()) { return; }
+            if (HasBeenInitalised) { return; }
 
             if(quantity <= 0) { throw new QuantityOutOfRangeException($"{nameof(quantity)} {SharedStrings.WasLessThanOne}"); }
             Quantity = quantity;
@@ -43,9 +41,9 @@ namespace PureGym.Models.Entities
 
         public void Update(IIsAnInventoryItem item = default(IIsAnInventoryItem), int quantity = 1)
         {
-            if (!HasBeenInitalised() && item?.Equals(default(IIsAnInventoryItem)) == false)
+            if ((HasBeenInitalised && Helper.CheckIfValueIsNotNull(item)) == false)
             {
-                Init(item.Key, item.Description, item.Price, item.Category, quantity, item.Id);
+                Init(item.Key, item.Description, item.Value, item.Category, quantity, item.Id);
             }          
         }
 
@@ -53,5 +51,8 @@ namespace PureGym.Models.Entities
         {
             Quantity = quantity;
         }
+
+        public override string ToString() => $"{Quantity} x {Description} @ {Value}";
+
     }
 }
