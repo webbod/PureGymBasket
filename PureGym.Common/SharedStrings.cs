@@ -13,5 +13,7 @@
         public const string OnlyOneAllowed = "only one is allowed";
         public const string AlreadyUsed = "has already been used";
         public const string NotFound = "not found";
+        public const string Applied = "Applied";
+        public const string RendererNotFound = "does not have a renderer for";
     }
 }
