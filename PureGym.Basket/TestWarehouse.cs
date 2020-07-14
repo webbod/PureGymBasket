@@ -13,6 +13,7 @@ namespace PureGym.Basket
         public const string HAT001 = "HAT001";
         public const string COAT01 = "COAT01";
         public const string SHOE11 = "SHOE11";
+        public const string VOU30 = "VOU30";
     }
 
     public class TestWarehouse : IIsAWarehouse
@@ -31,6 +32,7 @@ namespace PureGym.Basket
             Inventory.Insert(new GenericInventoryItem(WarehouseKeys.HAT001, "A Nice Hat", new Money(10.50m, WarehouseCurrency), StockCategory.HeadGear));
             Inventory.Insert(new GenericInventoryItem(WarehouseKeys.COAT01, "A Decent Coat", new Money(85.00m, WarehouseCurrency), StockCategory.Formalwear));
             Inventory.Insert(new GenericInventoryItem(WarehouseKeys.SHOE11, "Cheap Shoes", new Money(12.99m, WarehouseCurrency), StockCategory.Footwear));
+            Inventory.Insert(new GenericInventoryItem(WarehouseKeys.VOU30, "£30 Gift Voucher", new Money(30.00m, WarehouseCurrency), StockCategory.Vouchers));
         }
 
         public IIsABasketItem GetItem(string key)

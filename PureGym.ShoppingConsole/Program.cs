@@ -16,6 +16,7 @@ namespace PureGym.ShoppingConsole
             shop.AddToBasket(WarehouseKeys.HAT001);
             shop.AddToBasket(WarehouseKeys.COAT01);
             shop.AddToBasket(WarehouseKeys.SHOE11);
+            shop.AddToBasket(WarehouseKeys.VOU30);
 
             shop.UpdateBasketQuantity(WarehouseKeys.HAT001, 3);
             shop.UpdateBasketQuantity(WarehouseKeys.HAT001, -2);
