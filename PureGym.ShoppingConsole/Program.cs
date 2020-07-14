@@ -1,6 +1,8 @@
 ﻿using PureGym.Basket;
 using PureGym.Common.Enumerations;
 using PureGym .Models.Compositions;
+using System;
+using System.Linq;
 
 namespace PureGym.ShoppingConsole
 {
@@ -29,7 +31,39 @@ namespace PureGym.ShoppingConsole
             var json = shop.ExportBasketToJson();
             shop.ImportBasketFromJson(json);
             
-            
+            foreach(var line in invoice.BasketItems)
+            {
+                Console.WriteLine(line.Description);
+            }
+            Console.WriteLine(invoice.BasketTotal);
+            Console.WriteLine("-------------------------");
+            foreach (var line in invoice.Offers)
+            {
+                Console.WriteLine(line.Description);
+            }
+            if (invoice.OfferTotal > 0)
+            {
+                Console.WriteLine(invoice.BasketTotal);
+            }
+            if (invoice.Offers.Any())
+            {
+                Console.WriteLine("-------------------------");
+            }
+            foreach (var line in invoice.Vouchers)
+            {
+                Console.WriteLine(line.Description);
+            }
+            if (invoice.VoucherTotal > 0)
+            {
+                Console.WriteLine(invoice.VoucherTotal);
+            }
+            if (invoice.Vouchers.Any())
+            {
+                Console.WriteLine("-------------------------");
+            }
+            Console.WriteLine(invoice.GrandTotal);
+            Console.ReadLine();
+            Console.ReadLine();
         }        
     }
 }
