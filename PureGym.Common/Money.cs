@@ -31,13 +31,13 @@ namespace PureGym.Common
             return this;
         }
 
-        public Money Zero(Currency currency)
+        public static Money Zero(Currency currency)
         {
             return new Money(0m, currency);
         }
 
         /// <exception cref="ArgumentOutOfRangeException"></exception>
-        public void Discount(decimal percentage)
+        public Money Discount(decimal percentage)
         {
             if (percentage < 0 || percentage > 100)
             {
@@ -45,10 +45,12 @@ namespace PureGym.Common
             }
 
             Value -= Value * percentage / 100;
+
+            return this;
         }
 
         /// <exception cref="ArgumentOutOfRangeException"></exception>
-        public void Increase(decimal percentage)
+        public Money Increase(decimal percentage)
         {
             if (percentage < 0)
             {
@@ -56,6 +58,8 @@ namespace PureGym.Common
             }
 
             Value += Value * percentage / 100;
+
+            return this;
         }
 
         public override string ToString()
