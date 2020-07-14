@@ -3,36 +3,20 @@ using PureGym.Common.Exceptions;
 using PureGym.Interfaces.Common;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace PureGym.Models.Entities
 {
     public class GenericOffer : AGenericEntity, IIsAnOfferItem
     {
-        public string Description { get; private set; }
 
-        public string Message { get; private set; }
-
-        public Money Value { get; private set; }
+        public string Reason { get; private set; }
 
         public bool CanBeApplied { get; private set; }
 
-        public void WillBeApplied() { CanBeApplied = true; }
-
-        public void WontBeAppliedYet() { CanBeApplied = false; }
-
-        public void MessageIs(string message) { Message = message; }
-
-        public void MessageHasNotBeenSet() { Message = string.Empty; }
-
+        /// <summary>
+        /// A chain of rules that determines when an offer can be used
+        /// </summary>
         public Func<List<IIsABasketItem>, bool> ValidationTest { get; private set; }
-
-        public bool CanBeAppliedTo(List<IIsABasketItem> basket, Func<List<IIsABasketItem>, bool> ifItPassesThis)
-        {
-            WontBeAppliedYet();
-            MessageHasNotBeenSet();
-            return ifItPassesThis(basket);
-        }
 
         public GenericOffer() {   }
 
@@ -44,22 +28,32 @@ namespace PureGym.Models.Entities
 
         protected void Init(string key, string description, Money value, Func<List<IIsABasketItem>, bool> validationTest, Guid id = default(Guid))
         {
-            if (HasBeenInitalised()) { return; }
+            if (HasBeenInitalised) { return; }
 
             WontBeAppliedYet();
-            
-            if (value < 0) { throw new PriceOutOfRangeException($"{nameof(value)} {SharedStrings.WasNegative}"); }
-            Value = value;
-
-            Helper.CheckIfValueIsNull(description, nameof(description));
-            Description = description;
-
+          
             Helper.CheckIfValueIsNull(validationTest, nameof(ValidationTest));
             ValidationTest = validationTest;
 
-            base.Init(key, id);
+            base.Init(key, description, value, id);
         }
 
+        private void WillBeApplied() { CanBeApplied = true; }
+
+        private void WontBeAppliedYet() { CanBeApplied = false; }
+
+        public void ReasonIs(string message) { Reason = message; }
+
+        private void ResetReason() { Reason = string.Empty; }
+        
+        private bool CanBeAppliedTo(List<IIsABasketItem> basket, Func<List<IIsABasketItem>, bool> ifItPassesThis)
+        {
+            WontBeAppliedYet();
+            ResetReason();
+            return ifItPassesThis(basket);
+        }
+
+        // TODO remove all of these strings
         public void SeeIfItCanBeAppliedTo(List<IIsABasketItem> basket)
         {
             try
@@ -67,23 +61,26 @@ namespace PureGym.Models.Entities
                 this.CanBeAppliedTo(basket, ifItPassesThis: ValidationTest);
                 this.WillBeApplied();
 
-                MessageIs($"1 x {Value} {Description} Offer Voucher {Key} applied");
+                ReasonIs($"1 x {Value} {Description} Offer Voucher {Key} applied");
             }
             catch (OfferNotValidException error)
             {
                 if (error.Reason.IsMissingCategory)
                 {
-                    MessageIs($"There are no products in your basket applicable to voucher Voucher {Key}");
+                    ReasonIs($"There are no products in your basket applicable to voucher Voucher {Key}");
                 }
                 else if (error.Reason.IsInsuffientSpend)
                 {
-                    MessageIs($"You have not reached the spend threshold for voucher {Key}. Spend another {error.Reason.OutstandingBalance} to receive {Value} discount from your basket total.");
+                    ReasonIs($"You have not reached the spend threshold for voucher {Key}. Spend another {error.Reason.OutstandingBalance} to receive {Value} discount from your basket total.");
                 }
             }
             catch (ArgumentNullException)
             {
-                MessageIs($"There are no products in your basket applicable to voucher Voucher {Key}");
+                ReasonIs($"There are no products in your basket applicable to voucher Voucher {Key}");
             }
         }
+
+        public override string ToString() => $"{Description} {(CanBeApplied ? SharedStrings.Applied : Reason)}";
+        
     }
 }
