@@ -17,15 +17,16 @@ namespace PureGym.Common
         /// <exception cref="ArgumentNullException"></exception>
         public static void CheckIfValueIsNull(object value, string name)
         {
-            if (value == null || value == default)
+            if (value == null || value.Equals(default))
             {
                 throw new ArgumentNullException();
             }
         }
 
-        public static bool CheckIfValueIsNotNull(object value)
+        /// <returns>false if it is null</returns>
+        public static bool CheckIfValueIsNotNull<T>(T value)
         {
-            return !(value == null || value == default);
+            return !(value == null || value.Equals(default(T)));
         }
         #endregion
     }
