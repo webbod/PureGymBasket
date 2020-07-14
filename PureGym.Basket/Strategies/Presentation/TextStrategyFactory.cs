@@ -1,4 +1,5 @@
-﻿using PureGym.Common.Enumerations;
+﻿using PureGym.Common;
+using PureGym.Common.Enumerations;
 using PureGym.Interfaces.Common;
 using PureGym.Interfaces.Strategies;
 using System;
@@ -16,19 +17,19 @@ namespace PureGym.Basket.Strategies.Presentation
             switch (typeOfContainer) {
 
                 case TypesOfContainer.Basket:
-                    return new Func<List<TEntityType>, List<TOutputType>>((list) => list.Select(i => { var item = i as IIsABasketItem; return $"{item.Quantity} x {item.Description} @ {item.Price}" as TOutputType; }).ToList());
+                    return new Func<List<TEntityType>, List<TOutputType>>((list) => list.Select(i => i.ToString() as TOutputType).ToList());
 
                 case TypesOfContainer.Offer:
-                    return new Func<List<TEntityType>, List<TOutputType>>((list) => list.Select(i => { var item = i as IIsAnOfferItem; return $"{item.Description} {(item.CanBeApplied ? "Applied" : "")}" as TOutputType; }).ToList());
+                    return new Func<List<TEntityType>, List<TOutputType>>((list) => list.Select(i => i.ToString() as TOutputType).ToList());
 
                 case TypesOfContainer.Voucher:
-                    return new Func<List<TEntityType>, List<TOutputType>>((list) => list.Select(i => { var item = i as IIsAVoucherItem; return $"{item.Description} {(item.Applied ? "Applied" : "")}" as TOutputType; }).ToList());
+                    return new Func<List<TEntityType>, List<TOutputType>>((list) => list.Select(i => i.ToString() as TOutputType).ToList());
 
                 case TypesOfContainer.Inventory:
-                    return new Func<List<TEntityType>, List<TOutputType>>((list) => list.Select(i => { var item = i as IIsAnInventoryItem; return $"{item.Description} @ {item.Price}" as TOutputType; }).ToList());
+                    return new Func<List<TEntityType>, List<TOutputType>>((list) => list.Select(i => i.ToString() as TOutputType).ToList());
 
                 default:
-                    throw new NotImplementedException($"{nameof(Render)} does not have a renderer for {typeOfContainer.ToString()}");
+                    throw new NotImplementedException($"{nameof(Render)} {SharedStrings.RendererNotFound} {typeOfContainer.ToString()}");
             }
         }
     }
