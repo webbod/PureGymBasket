@@ -5,7 +5,6 @@ using PureGym.Interfaces.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace PureGym.Models.Rules
 {
@@ -68,7 +67,7 @@ namespace PureGym.Models.Rules
         ///     Basket.IsNotEmpty().AndTheValueIsAtLeast(50).ThenItIsValid();
         /// </example>        
         public static IEnumerable<IIsABasketItem> AndTheValueIsAtLeast(this IEnumerable<IIsABasketItem> items, Money minimumValue) =>
-            Money.CurrenciesMatch(minimumValue, items.First().Price) ?
+            Money.CurrenciesMatch(minimumValue, items.First().Value) ?
                 items.AndTheValueIsAtLeast(minimumValue.Value) :
                 throw new IncompatibleCurrenciesException($"The {nameof(items)} is in a different currency to the {nameof(minimumValue)}");
 
@@ -85,8 +84,8 @@ namespace PureGym.Models.Rules
         /// </example>                
         public static IEnumerable<IIsABasketItem> AndTheValueIsAtLeast(this IEnumerable<IIsABasketItem> items, decimal minimumValue)
         {
-            var currency = items.First()?.Price.Currency ?? Currency.Unknown;
-            var total = items.Sum(i => i.Price * i.Quantity, currency);
+            var currency = items.First()?.Value.Currency ?? Currency.Unknown;
+            var total = items.Sum(i => i.Value * i.Quantity, currency);
             return total >= minimumValue ? 
                 items : 
                 throw new OfferNotValidException(new OfferNotValidException.ValidityError { OutstandingBalance = minimumValue - total });
