@@ -80,7 +80,7 @@ namespace PureGym.Models.Entities
             }
         }
 
-        public override string ToString() => $"{Description} {(CanBeApplied ? SharedStrings.Applied : Reason)}";
+        public override string ToString() => $"{Description} {(CanBeApplied ? SharedStrings.Applied : $"::{Reason}")}";
         
     }
 }

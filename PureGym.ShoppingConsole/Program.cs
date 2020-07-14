@@ -1,5 +1,6 @@
 ﻿using PureGym.Basket;
 using PureGym.Common.Enumerations;
+using PureGym.Interfaces.Common;
 using PureGym .Models.Compositions;
 using System;
 using System.Linq;
@@ -30,40 +31,53 @@ namespace PureGym.ShoppingConsole
             // the shop only supports Json at the moment
             var json = shop.ExportBasketToJson();
             shop.ImportBasketFromJson(json);
-            
-            foreach(var line in invoice.BasketItems)
+
+            RenderInvoice(invoice);
+            Console.ReadLine();
+            Console.ReadLine();
+        }        
+
+        static void RenderInvoice(IIsAnInvoice invoice)
+        {
+            string offerDetails = string.Empty;
+            string message = string.Empty;
+
+            if (invoice.Offers.Any())
+            {
+                var descriptionParts = invoice.Offers.First().Description.Split("::", StringSplitOptions.RemoveEmptyEntries);
+                offerDetails = descriptionParts.First();
+
+                if (descriptionParts.Count() == 2) { message = descriptionParts.Last(); }
+            }
+
+            foreach (var line in invoice.BasketItems)
             {
                 Console.WriteLine(line.Description);
             }
             Console.WriteLine(invoice.BasketTotal);
             Console.WriteLine("-------------------------");
-            foreach (var line in invoice.Offers)
+
+            if (!string.IsNullOrEmpty(offerDetails))
             {
-                Console.WriteLine(line.Description);
-            }
-            if (invoice.OfferTotal > 0)
-            {
-                Console.WriteLine(invoice.BasketTotal);
-            }
-            if (invoice.Offers.Any())
-            {
+                Console.WriteLine(offerDetails);
                 Console.WriteLine("-------------------------");
             }
+
             foreach (var line in invoice.Vouchers)
             {
                 Console.WriteLine(line.Description);
             }
-            if (invoice.VoucherTotal > 0)
-            {
-                Console.WriteLine(invoice.VoucherTotal);
-            }
+
             if (invoice.Vouchers.Any())
             {
                 Console.WriteLine("-------------------------");
             }
-            Console.WriteLine(invoice.GrandTotal);
-            Console.ReadLine();
-            Console.ReadLine();
-        }        
+            Console.WriteLine($"Total: {invoice.GrandTotal}");
+
+            if (!string.IsNullOrEmpty(message))
+            {
+                Console.WriteLine($"Message: {message}");
+            }
+        }
     }
 }
