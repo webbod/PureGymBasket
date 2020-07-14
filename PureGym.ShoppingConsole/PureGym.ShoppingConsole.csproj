@@ -7,7 +7,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PureGym.Basket\PureGym.Basket.csproj" />
-    <ProjectReference Include="..\PureGym.ShoppingSystem\PureGym.ShoppingSystem.csproj" />
   </ItemGroup>
 
 </Project>

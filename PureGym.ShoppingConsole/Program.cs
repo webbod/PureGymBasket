@@ -1,6 +1,6 @@
 ﻿using PureGym.Basket;
 using PureGym.Common.Enumerations;
-using PureGym.ShoppingSystem;
+using PureGym .Models.Compositions;
 
 namespace PureGym.ShoppingConsole
 {
@@ -10,19 +10,19 @@ namespace PureGym.ShoppingConsole
         {
             var shop = new Shop(new TestWarehouse(), new TestOfferFactory(), new ShoppingBasket(), Currency.GBP);
                
-            shop.AddToBasket("HAT001");
-            shop.AddToBasket("COAT01");
-            shop.AddToBasket("SHOE11");
+            shop.AddToBasket(WarehouseKeys.HAT001);
+            shop.AddToBasket(WarehouseKeys.COAT01);
+            shop.AddToBasket(WarehouseKeys.SHOE11);
 
-            shop.UpdateBasketQuantity("HAT001", 3);
-            shop.UpdateBasketQuantity("COAT01", 2);
-            shop.RemoveFromBasket("SHOE11");
-            shop.UpdateBasketQuantity("HAT001", 20);
+            shop.UpdateBasketQuantity(WarehouseKeys.HAT001, 1);
+            shop.RemoveFromBasket(WarehouseKeys.COAT01);
+
 
             shop.AddAnOffer(OfferKeys.SaveFivePoundsWithHeadGear);
             shop.AddAVoucher(VoucherKeys.FivePoundGiftVoucher);
+            shop.AddAVoucher(VoucherKeys.FivePoundGiftVoucher);
+            shop.AddAVoucher(VoucherKeys.FivePoundGiftVoucher);
 
-            var total = shop.Total();
             var invoice = shop.GenerateInvoice();
 
             // the shop only supports Json at the moment
