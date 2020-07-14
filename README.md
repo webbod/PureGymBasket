@@ -6,7 +6,7 @@ Definitely have a look at the way the TestOfferFactory works, particularly the f
 I haven't had a chance to consider persistence beyond JSON and there is no notion of a basket identity at the moment - in a production system I would expect the Warehouse and OfferWarehouse to interact with your LOB systems, 
 for now it's enough that they are hardcoded
 
-Start with PureGym.Models.Compositions.Shop in the Development Branch
+Start with PureGym.Models.Compositions.GenericShop in the Development Branch
 
 ## PureGym.Common 
 Defines the Money type, exceptions, enumerations and constants
