@@ -25,6 +25,17 @@ namespace PureGym.Common
             Currency = currency;
         }
 
+        public Money ToZero()
+        {
+            Value = 0m;
+            return this;
+        }
+
+        public Money Zero(Currency currency)
+        {
+            return new Money(0m, currency);
+        }
+
         /// <exception cref="ArgumentOutOfRangeException"></exception>
         public void Discount(decimal percentage)
         {
