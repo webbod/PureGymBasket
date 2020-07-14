@@ -21,7 +21,7 @@ Interfaces for entities, containers, strategies and participants in the shopping
 Defines compositions, containers, entities, business rules and the invoice model
 
 ## PureGym.ShoppingConsole
-I'm migrating this into BehaviouralTests, and have been using it for debugging and to explore different degrees of coupling
+Creates an instance of a Shop and executes a series of operations against the basket before writing the invoice out to the console.
 
 ## PureGym.UnitTests 
 Will have the refactored XUnit tests
