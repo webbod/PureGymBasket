@@ -13,5 +13,11 @@ namespace PureGym.Basket.Rules
             .WhenSpendingAtLeast50Pounds()
             .ThenItCanBeUsed();
 
+        public static bool WhenSpendingOver50Pounds(this IEnumerable<IIsABasketItem> basket) =>
+            basket
+            .IgnoringAnyVouchers()
+            .WhenSpendingAtLeast50Pounds()
+            .ThenItCanBeUsed();
+
     }
 }

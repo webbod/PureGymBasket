@@ -36,6 +36,11 @@ namespace PureGym.Models.Compositions
             Basket.Initalise(ShopCurrency);
         }
 
+        public void EmptyBasket()
+        {
+            Basket.Reset();
+        }
+
         public void AddToBasket(string key)
         {
             Basket.AddAnItem(Warehouse.GetItem(key));

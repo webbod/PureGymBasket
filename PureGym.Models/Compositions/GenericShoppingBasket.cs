@@ -33,6 +33,13 @@ namespace PureGym.Models.Compositions
             _ActivityStrategies = new Dictionary<StrategicActivity, Dictionary<TypesOfContainer, IIsAStrategy>>();
         }
 
+        public void Reset()
+        {
+            _BasketItems.Reset();
+            _VoucherItems.Reset();
+            _OfferItems.Reset();
+        }
+
         #region Strategies
         /// <param name="activity">The activity to set the strategy of</param>
         /// <param name="strategy">The object that will handle this activity</param>

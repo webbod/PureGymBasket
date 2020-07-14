@@ -24,5 +24,7 @@ namespace PureGym.Interfaces.ShoppingSystem
         void ImportBasketFromJson(string json);
 
         IIsAnInvoice GenerateInvoice();
+
+        void EmptyBasket();
     }
 }

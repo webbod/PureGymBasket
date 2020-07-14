@@ -53,6 +53,11 @@ namespace PureGym.Models.Containers
         }
         #endregion
 
+        public void Reset()
+        {
+            Store.Clear();
+        }
+
         #region Container Management
         /// <returns>The number of items in the container</returns>
         public int Count()

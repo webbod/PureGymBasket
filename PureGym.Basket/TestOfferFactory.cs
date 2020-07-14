@@ -12,6 +12,7 @@ namespace PureGym.Basket
     public class OfferKeys
     {
         public const string SaveFivePoundsWithHeadGear = "SaveFivePoundsWithHeadGear";
+        public const string SaveFivePoundsOnBasketsOverFifty = "SaveFivePoundsOnBasketsOverFifty";
     }
 
     public class VoucherKeys
@@ -39,6 +40,9 @@ namespace PureGym.Basket
             {
                 case OfferKeys.SaveFivePoundsWithHeadGear:
                     return SaveFivePoundsWithHeadGear(OfferKeys.SaveFivePoundsWithHeadGear);
+
+                case OfferKeys.SaveFivePoundsOnBasketsOverFifty:
+                    return SaveFivePoundsOnBasketsOverFifty(OfferKeys.SaveFivePoundsOnBasketsOverFifty);
             }
 
             throw new KeyNotFoundException($"{nameof(key)} {SharedStrings.NotFound}");
@@ -72,6 +76,12 @@ namespace PureGym.Basket
         {
             var validationTest = new Func<List<IIsABasketItem>, bool>((basket) => basket.WhenSpendingOver50PoundsWithAnyHeadGearPurchase());
             return new GenericOffer(key, "£5.00 off Head Gear in baskets over £50.00 Offer", new Money(5, OffersCurrency), validationTest);
+        }
+
+        private IIsAnOfferItem SaveFivePoundsOnBasketsOverFifty(string key)
+        {
+            var validationTest = new Func<List<IIsABasketItem>, bool>((basket) => basket.WhenSpendingOver50Pounds());
+            return new GenericOffer(key, "£5.00 off baskets over £50.00 Offer", new Money(5, OffersCurrency), validationTest);
         }
 
         private IIsAVoucherItem FixedPriceGiftVoucher(string key, Money value)

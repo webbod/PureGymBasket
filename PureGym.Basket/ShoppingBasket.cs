@@ -31,6 +31,11 @@ namespace PureGym.Basket
             Basket.SetStrategyForActivity(presentationFactory, StrategicActivity.Presentation, TypesOfContainer.Voucher);
         }
 
+        public void Reset()
+        {
+            Basket.Reset();
+        }
+
         public void AddAnItem(IIsABasketItem item)
         {
             Basket.AddToBasket(item as GenericBasketItem);

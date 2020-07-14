@@ -11,9 +11,11 @@ namespace PureGym.Basket
     public class WarehouseKeys
     {
         public const string HAT001 = "HAT001";
-        public const string COAT01 = "COAT01";
-        public const string SHOE11 = "SHOE11";
-        public const string VOU30 = "VOU30";
+        public const string HAT002 = "HAT002";
+        public const string JUMP01 = "JUMP01";
+        public const string JUMP02 = "JUMP02";
+        public const string LIGHT1 = "LIGHT1";
+        public const string VOUR30 = "VOUR30";
     }
 
     public class TestWarehouse : IIsAWarehouse
@@ -29,10 +31,12 @@ namespace PureGym.Basket
 
             Inventory = new InventoryContainer<GenericInventoryItem>(WarehouseCurrency);
 
-            Inventory.Insert(new GenericInventoryItem(WarehouseKeys.HAT001, "A Nice Hat", new Money(10.50m, WarehouseCurrency), StockCategory.HeadGear));
-            Inventory.Insert(new GenericInventoryItem(WarehouseKeys.COAT01, "A Decent Coat", new Money(85.00m, WarehouseCurrency), StockCategory.Formalwear));
-            Inventory.Insert(new GenericInventoryItem(WarehouseKeys.SHOE11, "Cheap Shoes", new Money(12.99m, WarehouseCurrency), StockCategory.Footwear));
-            Inventory.Insert(new GenericInventoryItem(WarehouseKeys.VOU30, "£30 Gift Voucher", new Money(30.00m, WarehouseCurrency), StockCategory.Vouchers));
+            Inventory.Insert(new GenericInventoryItem(WarehouseKeys.HAT001, "Cheap Hat", new Money(10.50m, WarehouseCurrency), StockCategory.Casualwear));
+            Inventory.Insert(new GenericInventoryItem(WarehouseKeys.HAT002, "Nice Hat", new Money(25.00m, WarehouseCurrency), StockCategory.Formalwear));
+            Inventory.Insert(new GenericInventoryItem(WarehouseKeys.JUMP01, "Cheap Jumper", new Money(26.00m, WarehouseCurrency), StockCategory.Casualwear));
+            Inventory.Insert(new GenericInventoryItem(WarehouseKeys.JUMP02, "Fancy Jumper", new Money(54.65m, WarehouseCurrency), StockCategory.Formalwear));
+            Inventory.Insert(new GenericInventoryItem(WarehouseKeys.LIGHT1, "Head Light", new Money(3.50m, WarehouseCurrency), StockCategory.HeadGear));
+            Inventory.Insert(new GenericInventoryItem(WarehouseKeys.VOUR30, "£30 Gift Voucher", new Money(30.00m, WarehouseCurrency), StockCategory.Vouchers));
         }
 
         public IIsABasketItem GetItem(string key)

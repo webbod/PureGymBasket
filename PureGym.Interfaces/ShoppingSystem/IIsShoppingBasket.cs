@@ -9,6 +9,8 @@ namespace PureGym.Interfaces.ShoppingSystem
     {
         void Initalise(Currency currency);
 
+        void Reset();
+
         void AddAnItem(IIsABasketItem item);
 
         void IncrementQuantity(string key, int increment);
