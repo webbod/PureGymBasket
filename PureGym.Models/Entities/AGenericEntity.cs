@@ -1,41 +1,55 @@
 ﻿using Newtonsoft.Json;
+using PureGym.Common;
+using PureGym.Common.Exceptions;
 using PureGym.Interfaces.Common;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace PureGym.Models.Entities
 {
     [JsonObject(MemberSerialization.OptIn)]
     public abstract class AGenericEntity : IIsAnEntity
     {
+        /// <summary>
+        /// A globally unique Id for this specific entity
+        /// </summary>
         [JsonProperty]
         public Guid Id { get; private set; }
 
+        /// <summary>
+        /// A shared identitier among instances of this type of thing
+        /// </summary>
         [JsonProperty]
         public string Key { get; private set; }
 
+        [JsonProperty]
+        public string Description { get; private set; }
+
+        [JsonProperty]
+        public Money Value { get; private set; }
+
+        protected bool HasBeenInitalised => Helper.CheckIfValueIsNotNull<Guid>(Id);
+
         public AGenericEntity() { }
 
-        public AGenericEntity(string key, Guid id = default(Guid))
+        public AGenericEntity(string key, string description, Money value, Guid id = default(Guid))
         {
-            Init(key, id);
+            Init(key, description, value, id);
         }
 
-        protected bool HasBeenInitalised()
+        protected virtual void Init(string key, string description, Money value, Guid id = default(Guid))
         {
-            return !Id.Equals(default(Guid));
-        }
+            if(HasBeenInitalised) { return; }
 
-        protected virtual void Init(string key, Guid id = default(Guid))
-        {
-            if(HasBeenInitalised()) { return; }
+            Helper.CheckIfValueIsNull(key, nameof(key));
+            Helper.CheckIfValueIsNull(description, nameof(description));
 
-            if (string.IsNullOrEmpty(key)) { throw new ArgumentNullException($"{nameof(key)} was empty"); }
+            if (value < 0) { throw new ValueOutOfRangeException($"{nameof(value)} {SharedStrings.WasNegative}"); }
+
             Key = key;
+            Value = value;
+            Description = description;
 
-            Id = id.Equals(default(Guid)) ? Guid.NewGuid() : id;
-
+            Id = Helper.CheckIfValueIsNotNull<Guid>(id) ? id : Guid.NewGuid();
         }
     }
 }
