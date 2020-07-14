@@ -32,6 +32,24 @@ namespace PureGym.UnitTests
         }
 
         [Fact]
+        public void ThisRuleIsNotValidBecauseBasketDoesntContainTheRightStuff()
+        {
+            var basket = newBasket();
+
+            try
+            {
+                basket.GetAll()
+                .IsNotEmpty()
+                .AndHasStuffFrom(StockCategory.Swimwear)
+                .ThenItIsValid();
+            }
+            catch(OfferNotValidException ex)
+            {
+                Assert.True(ex.Reason.IsMissingCategory);
+            }
+        }
+
+        [Fact]
         public void ThisRuleIsValidIfBasketHasAHighEnoughValue()
         {
             var basket = newBasket();
@@ -40,6 +58,23 @@ namespace PureGym.UnitTests
                 .AndTheValueIsAtLeast(new Money(100, Currency.GBP))
                 .ThenItIsValid();
             Assert.True(actual);
+        }
+
+        [Fact]
+        public void ThisRuleIsNotValidBecauseBasketValueIsTooLow()
+        {
+            var basket = newBasket();
+            try
+            {
+                basket.GetAll()
+                .IsNotEmpty()
+                .AndTheValueIsAtLeast(new Money(500, Currency.GBP))
+                .ThenItIsValid();
+            }
+            catch(OfferNotValidException ex)
+            {
+                Assert.True(ex.Reason.IsInsuffientSpend);
+            }
         }
 
         [Fact]
@@ -59,13 +94,20 @@ namespace PureGym.UnitTests
         public void ThisRuleIsNotValidBecaueBasketValueIsTooLowAfterIgnoringSomeStuff()
         {
             var basket = newBasket();
-            Assert.Throws<OfferNotValidException>(() =>
+
+            try
+            {
                 basket.GetAll()
                 .IsNotEmpty()
                 .AndIfWeIgnoreStuffFrom(StockCategory.Footwear)
                 .AndTheValueIsAtLeast(new Money(70, Currency.GBP))
-                .ThenItIsValid()
-            );
+                .ThenItIsValid();
+            }
+            catch(OfferNotValidException ex)
+            {
+                Assert.True(ex.Reason.IsInsuffientSpend);
+            }
+            
         }
     }
 }
