@@ -3,12 +3,10 @@ using PureGym.Basket.Strategies.Presentation;
 using PureGym.Common;
 using PureGym.Common.Enumerations;
 using PureGym.Interfaces.Common;
-using PureGym.Interfaces.Strategies;
+using PureGym.Interfaces.ShoppingSystem;
 using PureGym.Models.Compositions;
-using PureGym.Models.Containers;
 using PureGym.Models.Entities;
-using PureGym.ShoppingSystem;
-using System;
+using PureGym.Models.Summary;
 using System.Collections.Generic;
 
 namespace PureGym.Basket
@@ -45,7 +43,7 @@ namespace PureGym.Basket
             Basket.IncrementQuantity(key, increment);
         }
 
-        public void RemoveFromBasket(string key)
+        public void RemoveItem(string key)
         {
             Basket.RemoveFromBasket(key);
         }
@@ -53,6 +51,16 @@ namespace PureGym.Basket
         public void AddAnOffer(IIsAnOfferItem offer)
         {
             Basket.TryToApplyOffer(offer as GenericOffer);
+        }
+
+        public void RemoveOffer(string key)
+        {
+            Basket.RemoveOffer(key);
+        }
+
+        public void RemoveVoucher(string key)
+        {
+            Basket.RemoveVoucher(key);
         }
 
         public void AddAVoucher(IIsAVoucherItem voucher)
@@ -70,9 +78,11 @@ namespace PureGym.Basket
             return Basket.CalculateBasketTotal();
         }
 
-        public List<string> GenerateInvoice()
+        public IIsAnInvoice GenerateInvoice()
         {
-            return Basket.RenderBasket<string>();
+            CheckOffers();
+
+            return Basket.GenerateInvoice();
         }
 
         public string ExportBasketToJson()
