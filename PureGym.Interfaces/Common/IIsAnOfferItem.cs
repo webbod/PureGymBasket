@@ -1,20 +1,22 @@
-﻿using PureGym.Common;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace PureGym.Interfaces.Common
 {
     public interface IIsAnOfferItem : IIsAnEntity, IHasAValue
     {
-        string Description { get; }
+        /// <summary>
+        /// Explains why the offer can't be used
+        /// </summary>
+        string Reason { get; }
 
-        string Message { get; }
-
-        Money Value { get; }
-
+        /// <summary>
+        /// Indicates that the offer can be used
+        /// </summary>
         bool CanBeApplied { get; }
 
+        /// <summary>
+        /// Tests if the offer can be used
+        /// </summary>
         void SeeIfItCanBeAppliedTo(List<IIsABasketItem> basket);
     }
 
